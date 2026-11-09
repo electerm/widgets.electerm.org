@@ -13,6 +13,36 @@ import stylus from 'stylus'
 
 const HTML_COMMENT = /<!--(?!\[if\b)/i
 
+// Favicons, the wordmark and the PWA icons are served from electerm.org, which
+// sets `Access-Control-Allow-Origin: *`. Keeping one origin for the shared
+// brand assets avoids shipping a second, drifting copy of the same binaries.
+const ASSET_HOST = 'https://electerm.org'
+
+// Only the manifest is site-specific (name / start_url / scope), so it is
+// generated here with absolute icon URLs instead of being copied.
+const MANIFEST = {
+  name: 'electerm widgets',
+  short_name: 'widgets',
+  description: 'Community registry of electerm widgets',
+  icons: [
+    {
+      src: `${ASSET_HOST}/android-chrome-192x192.png`,
+      sizes: '192x192',
+      type: 'image/png'
+    },
+    {
+      src: `${ASSET_HOST}/android-chrome-512x512.png`,
+      sizes: '512x512',
+      type: 'image/png'
+    }
+  ],
+  theme_color: '#ffffff',
+  background_color: '#ffffff',
+  display: 'standalone',
+  start_url: '/',
+  scope: '/'
+}
+
 async function renderPug (from, to, data) {
   const src = await readFile(from, 'utf8')
   const html = pug.render(src, { filename: from, ...data })
@@ -45,8 +75,11 @@ async function compileCss (root, publicDir) {
  * @param {string} opts.generatedAt ISO build timestamp
  */
 export async function renderSite ({ root, publicDir, host, widgets, generatedAt }) {
-  // Favicons, logo and webmanifest are copied verbatim from electerm.org.
-  await cp(path.join(root, 'src', 'static'), publicDir, { recursive: true })
+  await writeFile(
+    path.join(publicDir, 'site.webmanifest'),
+    JSON.stringify(MANIFEST, null, 2) + '\n',
+    'utf8'
+  )
   // Browser modules: pages import parts with native ESM, no bundling step.
   await cp(path.join(root, 'src', 'js'), path.join(publicDir, 'js'), { recursive: true })
 
@@ -54,6 +87,7 @@ export async function renderSite ({ root, publicDir, host, widgets, generatedAt 
   const views = path.join(root, 'src', 'views')
   const base = {
     host,
+    assetHost: ASSET_HOST,
     cssUrl,
     generatedAt,
     updatedLabel: generatedAt.slice(0, 10),

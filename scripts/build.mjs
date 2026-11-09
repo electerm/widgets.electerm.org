@@ -10,7 +10,7 @@
  *     (rendered from src/views pug templates)
  *   - public/styles.<hash>.css (compiled from src/css stylus parts)
  *   - public/js/** (native ESM pages + parts)
- *   - favicons, logo and webmanifest (copied from src/static)
+ *   - public/site.webmanifest (generated; shared icons/logo are served from electerm.org)
  *   - public/_headers
  *   - public/health
  *

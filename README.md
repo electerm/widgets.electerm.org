@@ -32,10 +32,15 @@ The site is built from `src/`, mirroring [electerm.org](https://electerm.org):
 - `src/views/` — pug pages (`index.pug`, `widget.pug`, `404.pug`) plus shared `parts/`
 - `src/css/` — `main.styl` requires one file per section from `css/parts/`
 - `src/js/pages/` — one native ESM entry per page, importing `js/parts/`
-- `src/static/` — favicons, logo and `site.webmanifest`, taken from electerm.org
+
+Shared brand assets (favicons, the `electerm.png` wordmark, PWA icons) are
+referenced directly from `https://electerm.org` rather than copied here —
+that origin already serves them with `Access-Control-Allow-Origin: *`. The
+build generates only the site-specific `public/site.webmanifest`, whose icon
+URLs are absolute.
 
 `npm run build` compiles the stylus parts into a content-hashed
-`styles.<hash>.css`, renders every pug page, and copies `static/` and `js/`
+`styles.<hash>.css`, renders every pug page, and copies `js/`
 into `public/`. Browser scripts are plain ESM, so there is no bundler.
 
 ## Data contract

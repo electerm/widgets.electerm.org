@@ -29,10 +29,14 @@ npm run wdev         # wrangler dev，端口 26790
 - `src/views/` — pug 页面（`index.pug`、`widget.pug`、`404.pug`）与公共 `parts/`
 - `src/css/` — `main.styl` 通过 `@require` 汇总 `css/parts/` 里每个区块的样式
 - `src/js/pages/` — 每个页面一个原生 ESM 入口，引用 `js/parts/`
-- `src/static/` — favicon、logo 与 `site.webmanifest`，取自 electerm.org
+
+共用的品牌资源（favicon、`electerm.png` 字标、PWA 图标）直接引用
+`https://electerm.org`，不在本站复制一份；该域名已带
+`Access-Control-Allow-Origin: *`。构建时只生成本站专属的
+`public/site.webmanifest`，里面的图标 URL 用绝对路径。
 
 `npm run build` 会把 stylus parts 编译成带内容哈希的 `styles.<hash>.css`，
-渲染所有 pug 页面，并把 `static/` 与 `js/` 复制进 `public/`。浏览器脚本是原生
+渲染所有 pug 页面，并把 `js/` 复制进 `public/`。浏览器脚本是原生
 ESM，不需要打包器。
 
 ## 数据契约
