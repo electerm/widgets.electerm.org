@@ -6,9 +6,11 @@
  *   - public/api/v1/index.json
  *   - public/api/v1/widgets/<id>.json
  *   - public/api/v1/revocations.json
- *   - public/index.html
- *   - public/widget/<id>/index.html
- *   - public/404.html
+ *   - public/index.html, public/widget/<id>/index.html, public/404.html
+ *     (rendered from src/views pug templates)
+ *   - public/styles.<hash>.css (compiled from src/css stylus parts)
+ *   - public/js/** (native ESM pages + parts)
+ *   - favicons, logo and webmanifest (copied from src/static)
  *   - public/_headers
  *   - public/health
  *
@@ -28,16 +30,17 @@ import { gunzipSync } from 'node:zlib'
 import * as tar from 'tar'
 import {
   computeDigest,
-  escapeHtml,
   isSafeRelativePath,
   isSafeSegment
 } from './lib/registry.mjs'
+import { renderSite } from './lib/render.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DATA_FILE = path.join(ROOT, 'data', 'widgets.json')
 const PUBLIC_DIR = path.join(ROOT, 'public')
 const API_DIR = path.join(PUBLIC_DIR, 'api', 'v1')
 const WIDGETS_API_DIR = path.join(API_DIR, 'widgets')
+const HOST = 'https://widgets.electerm.org'
 
 // Custom headers for static assets. CORS and cache behaviour used to be added
 // by the Worker; without a Worker script they must live in _headers.
@@ -418,140 +421,17 @@ async function buildWidget (spec, workRoot) {
   return { ...shared, files }
 }
 
-// ── Static HTML ─────────────────────────────────────────────
-const STYLE = [
-  'body{font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff;margin:0;padding:24px;line-height:1.6}',
-  'main{max-width:820px;margin:0 auto}',
-  'h1{font-size:22px}',
-  'h2{font-size:17px}',
-  'a{color:#111}',
-  'td{padding:3px 16px 3px 0;vertical-align:top}',
-  'ul{padding-left:18px}',
-  'li{margin:12px 0}',
-  'code{font-family:monospace}',
-  'button{border:1px solid #333;background:#fff;color:#111;padding:6px 12px;cursor:pointer}',
-  'hr{border:0;border-top:1px solid #ccc;margin:24px 0}',
-  '.note{font-size:14px}'
-].join('')
-
-const COPY_SCRIPT = `<script>
-function copyInstall (btn) {
-  var value = btn.getAttribute('data-install')
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(value).then(function () {
-      btn.textContent = 'Copied'
-    }, function () {
-      btn.textContent = 'Copy failed'
-    })
-  } else {
-    btn.textContent = 'Clipboard unavailable'
-  }
-}
-</script>`
-
-function layout (title, body) {
-  return `<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${escapeHtml(title)}</title>
-<style>${STYLE}</style>
-</head>
-<body>
-<main>
-${body}
-</main>
-</body>
-</html>
-`
-}
+// ── Site rendering (pug + stylus) ───────────────────────────
+// Templates, style parts and page scripts live in src/. See scripts/lib/render.mjs.
 
 function installString (w) {
   return `${w.owner}/${w.repo}#${w.ref}`
-}
-
-function copyButton (w, label) {
-  return `<button type="button" data-install="${escapeHtml(installString(w))}" onclick="copyInstall(this)">${escapeHtml(label)}</button>`
-}
-
-function renderIndex (widgets) {
-  const items = widgets.map((w) => {
-    const href = `/widget/${w.id}/`
-    const byline = w.author ? `by ${escapeHtml(w.author)} &middot; ` : ''
-    return `<li>
-<p><a href="${href}">${escapeHtml(w.name || w.id)}</a> &mdash; ${escapeHtml(w.version)}</p>
-<p>${escapeHtml(w.description)}</p>
-<p class="note">${byline}${escapeHtml(w.host)} &middot; <code>${escapeHtml(w.ref.slice(0, 10))}</code></p>
-<p>${copyButton(w, 'Copy install string')} <code>${escapeHtml(installString(w))}</code></p>
-</li>`
-  }).join('\n')
-  const body = `<h1>electerm widgets</h1>
-<p class="note">A community registry of electerm widgets. This site only indexes metadata; widget code is downloaded from each author's repository. Prefer installing from electerm's Widgets &rarr; Online tab: it pins the commit and verifies every file. The install strings below are for the web app and offline use, and are not verified by the registry.</p>
-<ul>
-${items}
-</ul>
-${COPY_SCRIPT}`
-  return layout('electerm widgets', body)
-}
-
-function renderWidgetPage (w) {
-  const srcHref = safeHref(w.sourceUrl)
-  const hp = safeHref(w.homepage)
-  const sourceCell = srcHref
-    ? `<a href="${escapeHtml(srcHref)}">${escapeHtml(w.sourceUrl)}</a>`
-    : escapeHtml(w.sourceUrl)
-  const homeCell = hp
-    ? `<a href="${escapeHtml(hp)}">${escapeHtml(w.homepage)}</a>`
-    : escapeHtml(w.homepage)
-  const rows = [
-    ['ID', w.id],
-    ['Name', w.name],
-    ['Description', w.description],
-    ['Author', w.author],
-    ['Version', w.version],
-    ['License', w.license],
-    ['Host', w.host],
-    ['Repository', `${w.owner}/${w.repo}`],
-    ['Subdir', w.subdir || '(repo root)'],
-    ['Commit', w.ref.slice(0, 10)],
-    ['Files', `${w.fileCount} (${w.totalSize} bytes)`],
-    ['Digest', w.digest]
-  ]
-  const tableRows = rows
-    .map(([k, v]) => `<tr><td>${escapeHtml(k)}</td><td>${escapeHtml(v)}</td></tr>`)
-    .join('\n')
-  const note = 'In the desktop app, use Widgets &rarr; Online to install this pinned commit with a per-file verification. For the web app or offline use, copy the string below into Widgets &rarr; Import; that path does not verify the registry digest.'
-  const body = `<p><a href="/">All widgets</a></p>
-<h1>${escapeHtml(w.name || w.id)}</h1>
-<table>
-<tr><td>Source</td><td>${sourceCell}</td></tr>
-<tr><td>Homepage</td><td>${homeCell}</td></tr>
-${tableRows}
-</table>
-<h2>Install</h2>
-<p class="note">${note}</p>
-<p>${copyButton(w, 'Copy install string')}</p>
-<p><code>${escapeHtml(installString(w))}</code></p>
-<hr>
-<p class="note">Installing a widget means trusting its author. A widget's <code>main.js</code> runs inside the electerm main process with full Node.js privileges. This site only indexes metadata; the code is downloaded from the author's repository.</p>
-${COPY_SCRIPT}`
-  return layout(`${w.name || w.id} - electerm widgets`, body)
-}
-
-function render404 () {
-  return layout('Not found - electerm widgets', '<h1>404 - Not found</h1>\n<p><a href="/">All widgets</a></p>')
 }
 
 // ── Output ──────────────────────────────────────────────────
 async function writeJson (file, data) {
   await mkdir(path.dirname(file), { recursive: true })
   await writeFile(file, JSON.stringify(data, null, 2) + '\n', 'utf8')
-}
-
-async function writeHtml (file, html) {
-  await mkdir(path.dirname(file), { recursive: true })
-  await writeFile(file, html, 'utf8')
 }
 
 function validateSpecs (raw) {
@@ -637,15 +517,23 @@ async function main () {
     revocations: []
   })
 
-  await writeHtml(path.join(PUBLIC_DIR, 'index.html'), renderIndex(fulls))
-  for (const w of fulls) {
-    await writeHtml(path.join(PUBLIC_DIR, 'widget', w.id, 'index.html'), renderWidgetPage(w))
-  }
-  await writeHtml(path.join(PUBLIC_DIR, '404.html'), render404())
+  const viewWidgets = fulls.map((w) => ({
+    ...w,
+    installString: installString(w),
+    homepageUrl: safeHref(w.homepage),
+    sourceUrl: safeHref(w.sourceUrl)
+  }))
+  const cssName = await renderSite({
+    root: ROOT,
+    publicDir: PUBLIC_DIR,
+    host: HOST,
+    widgets: viewWidgets,
+    generatedAt
+  })
   await writeFile(path.join(PUBLIC_DIR, '_headers'), HEADERS_FILE, 'utf8')
   await writeFile(path.join(PUBLIC_DIR, 'health'), '{"ok":true}\n', 'utf8')
 
-  console.log(`wrote ${fulls.length} widgets, generatedAt ${generatedAt}`)
+  console.log(`wrote ${fulls.length} widgets, ${cssName}, generatedAt ${generatedAt}`)
 }
 
 main().catch((err) => {

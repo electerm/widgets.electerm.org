@@ -1,0 +1,23 @@
+footer.site-footer
+  .container
+    .footer-grid
+      .footer-brand
+        .footer-brand-name
+          img(src='/electerm.png' alt='')
+          span electerm widgets
+        p A community registry of electerm widgets. The site indexes metadata only; widget code is downloaded from each author's repository at a pinned commit.
+      .footer-col
+        h4 Registry
+        ul
+          li: a(href='/api/v1/index.json') index.json
+          li: a(href='/api/v1/revocations.json') revocations.json
+          li: a(href='https://github.com/electerm/widgets.electerm.org' target='_blank' rel='noreferrer') Source
+      .footer-col
+        h4 electerm
+        ul
+          li: a(href='https://electerm.org' target='_blank' rel='noreferrer') Homepage
+          li: a(href='https://github.com/electerm/electerm' target='_blank' rel='noreferrer') GitHub
+          li: a(href='https://github.com/electerm/electerm/wiki' target='_blank' rel='noreferrer') Documentation
+    .footer-bottom
+      p © 2026 electerm community. MIT License.
+      p Installing a widget means trusting its author.

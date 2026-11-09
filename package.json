@@ -15,7 +15,9 @@
     "tar": "^7.4.3"
   },
   "devDependencies": {
+    "pug": "^3.0.4",
     "standard": "^17.1.2",
+    "stylus": "^0.64.0",
     "wrangler": "^4.110.0"
   },
   "standard": {

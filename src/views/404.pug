@@ -1,0 +1,15 @@
+doctype html
+html(lang='en')
+  head
+    include ./parts/head
+  body
+    include ./parts/header
+    main
+      section.error-section
+        .container
+          p.eyebrow 404
+          h1 Nothing here
+          p That page is not part of the registry.
+          a.btn(href='/') Back to widgets
+    include ./parts/footer
+    script(type='module' src='/js/pages/404.js')

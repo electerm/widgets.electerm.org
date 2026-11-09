@@ -1,0 +1,39 @@
+include ./parts/widget-card
+doctype html
+html(lang='en')
+  head
+    include ./parts/head
+  body
+    include ./parts/header
+    main
+      section.hero
+        .container
+          p.eyebrow Community registry
+          h1.hero-title Widgets for electerm
+          p.hero-lead Extend electerm with community widgets. Every entry is pinned to a commit, and the registry publishes a reproducible digest for every file in the package.
+          .hero-stats
+            .stat
+              span.stat-num= count
+              span.stat-label widgets indexed
+            .stat
+              span.stat-num= updatedLabel
+              span.stat-label last built
+            .stat
+              span.stat-num sha256
+              span.stat-label per-file digest
+      section.registry
+        .container
+          .section-head
+            h2 Available widgets
+            p Metadata only — widget code is downloaded from each author's repository.
+          .widget-grid
+            each w in widgets
+              +widgetCard(w)
+      section.trust
+        .container
+          .trust-inner
+            h2 Before you install
+            p Installing a widget means trusting its author. Its main.js runs inside the electerm main process with full Node.js privileges. Prefer Widgets → Online in the desktop app: it pins the commit and verifies every file.
+            a.text-link(href='https://electerm.org' target='_blank' rel='noreferrer') About electerm
+    include ./parts/footer
+    script(type='module' src='/js/pages/index.js')

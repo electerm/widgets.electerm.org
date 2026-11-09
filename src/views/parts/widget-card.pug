@@ -1,0 +1,14 @@
+//- Shared card mixin for the registry grid.
+mixin widgetCard(w)
+  article.widget-card
+    a.widget-card-link(href='/widget/' + w.id + '/')
+      .widget-card-top
+        h3.widget-card-title= w.name || w.id
+        span.widget-card-version= w.version || ''
+      p.widget-card-desc= w.description
+    .widget-card-foot
+      .widget-card-meta
+        span= w.id
+        if w.author
+          span= w.author
+      button.copy-btn(type='button' data-copy=w.installString aria-label='Copy install string') Copy install

@@ -1,0 +1,44 @@
+/* ===== Homepage hero ===== */
+.hero
+  padding 72px 0 56px
+
+.hero-title
+  font-size clamp(2.2rem, 5vw, 3.2rem)
+  margin 14px 0 18px
+  max-width 18ch
+
+.hero-lead
+  max-width 62ch
+  font-size 1.05rem
+  color var(--color-text-secondary)
+
+.hero-stats
+  display flex
+  flex-wrap wrap
+  gap 40px
+  margin-top 44px
+  padding-top 28px
+  border-top 1px solid var(--color-border-light)
+
+.stat
+  display flex
+  flex-direction column
+  gap 2px
+
+.stat-num
+  font-family var(--font-mono)
+  font-size 1.3rem
+  font-weight 650
+  letter-spacing -0.02em
+
+.stat-label
+  font-size 0.75rem
+  color var(--color-text-muted)
+  text-transform uppercase
+  letter-spacing 0.08em
+
+@media (max-width: 479px)
+  .hero
+    padding 48px 0 40px
+  .hero-stats
+    gap 24px

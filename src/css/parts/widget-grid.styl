@@ -1,0 +1,68 @@
+/* ===== Registry grid + cards ===== */
+.registry
+  padding 56px 0 64px
+
+.widget-grid
+  display grid
+  grid-template-columns 1fr
+  gap 16px
+
+@media (min-width: 640px)
+  .widget-grid
+    grid-template-columns repeat(2, 1fr)
+    gap 20px
+
+.widget-card
+  display flex
+  flex-direction column
+  min-height 220px
+  border 1px solid var(--color-border)
+  border-radius var(--radius-md)
+  background #fff
+  overflow hidden
+  transition border-color 0.18s ease, box-shadow 0.18s ease
+  &:hover
+    border-color var(--color-primary)
+    box-shadow var(--shadow-md)
+
+.widget-card-link
+  display block
+  flex 1
+  padding 24px 24px 14px
+  color var(--color-text)
+  &:hover
+    color var(--color-text)
+
+.widget-card-top
+  display flex
+  align-items baseline
+  justify-content space-between
+  gap 12px
+
+.widget-card-title
+  font-size 1.15rem
+
+.widget-card-version
+  font-family var(--font-mono)
+  font-size 0.75rem
+  color var(--color-text-muted)
+
+.widget-card-desc
+  margin-top 10px
+  font-size 0.92rem
+  color var(--color-text-secondary)
+
+.widget-card-foot
+  display flex
+  align-items center
+  justify-content space-between
+  gap 12px
+  padding 14px 24px 20px
+  border-top 1px solid var(--color-border-light)
+
+.widget-card-meta
+  display flex
+  flex-direction column
+  font-family var(--font-mono)
+  font-size 0.72rem
+  color var(--color-text-muted)

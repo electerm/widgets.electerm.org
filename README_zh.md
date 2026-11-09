@@ -7,18 +7,33 @@ Static Assets 上的纯静态站点。没有 Worker 脚本、没有数据库、�
 widget 等同于信任作者——其 `main.js` 运行在 electerm 主进程中，拥有完整的
 Node.js 权限。
 
+只是把 electerm 内置功能重新打包一遍的 widget 不收录，这里列的是应用本身没有的功能。
+
 ## 本地开发
 
 ```
 npm install          # 生成 package-lock.json，请提交
 npm test
 npm run lint
-npm run build        # 抓取源码，生成 public/
+npm run build        # 抓取源码，渲染 pug/stylus，生成 public/
 npm run wdev         # wrangler dev，端口 26790
 ```
 
 `public/` 为生成物且已加入 .gitignore，每次部署都由 `npm run build` 重建。
 不需要数据库，也没有迁移步骤。
+
+## 站点结构
+
+站点源码在 `src/`，结构与 [electerm.org](https://electerm.org) 一致：
+
+- `src/views/` — pug 页面（`index.pug`、`widget.pug`、`404.pug`）与公共 `parts/`
+- `src/css/` — `main.styl` 通过 `@require` 汇总 `css/parts/` 里每个区块的样式
+- `src/js/pages/` — 每个页面一个原生 ESM 入口，引用 `js/parts/`
+- `src/static/` — favicon、logo 与 `site.webmanifest`，取自 electerm.org
+
+`npm run build` 会把 stylus parts 编译成带内容哈希的 `styles.<hash>.css`，
+渲染所有 pug 页面，并把 `static/` 与 `js/` 复制进 `public/`。浏览器脚本是原生
+ESM，不需要打包器。
 
 ## 数据契约
 
@@ -39,7 +54,7 @@ npm run wdev         # wrangler dev，端口 26790
 {
   "host": "github.com",
   "owner": "electerm",
-  "repo": "electerm-widget-ftp-server",
+  "repo": "electerm-widget-tftp",
   "subdir": "",
   "ref": "<40 位小写十六进制 commit sha>"
 }

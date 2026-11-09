@@ -9,18 +9,34 @@ author's repository at a pinned commit. Installing a widget means trusting its
 author — a widget's `main.js` runs inside the electerm main process with full
 Node.js privileges.
 
+Widgets that merely repackage an electerm built-in are not listed here; the
+registry is for functionality that is not already in the app.
+
 ## Local development
 
 ```
 npm install          # generates package-lock.json; commit it
 npm test
 npm run lint
-npm run build        # fetches sources; writes public/
+npm run build        # fetches sources; renders pug/stylus; writes public/
 npm run wdev         # wrangler dev on localhost:26790
 ```
 
 `public/` is generated and git-ignored; it is rebuilt by `npm run build` on
 every deploy. No database or migration step is needed.
+
+## Site structure
+
+The site is built from `src/`, mirroring [electerm.org](https://electerm.org):
+
+- `src/views/` — pug pages (`index.pug`, `widget.pug`, `404.pug`) plus shared `parts/`
+- `src/css/` — `main.styl` requires one file per section from `css/parts/`
+- `src/js/pages/` — one native ESM entry per page, importing `js/parts/`
+- `src/static/` — favicons, logo and `site.webmanifest`, taken from electerm.org
+
+`npm run build` compiles the stylus parts into a content-hashed
+`styles.<hash>.css`, renders every pug page, and copies `static/` and `js/`
+into `public/`. Browser scripts are plain ESM, so there is no bundler.
 
 ## Data contract
 
@@ -41,7 +57,7 @@ Open a PR that appends an entry to `data/widgets.json`:
 {
   "host": "github.com",
   "owner": "electerm",
-  "repo": "electerm-widget-ftp-server",
+  "repo": "electerm-widget-tftp",
   "subdir": "",
   "ref": "<40-char lowercase hex commit sha>"
 }

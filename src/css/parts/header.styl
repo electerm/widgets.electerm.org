@@ -1,0 +1,73 @@
+/* ===== Sticky site header ===== */
+.site-header
+  position sticky
+  top 0
+  z-index 50
+  height var(--header-height)
+  background rgba(255, 255, 255, 0.94)
+  backdrop-filter blur(12px)
+  -webkit-backdrop-filter blur(12px)
+  border-bottom 1px solid var(--color-border)
+  &.is-scrolled
+    box-shadow var(--shadow-sm)
+
+.header-inner
+  height var(--header-height)
+  display flex
+  align-items center
+  gap 24px
+
+.header-logo
+  display inline-flex
+  align-items center
+  gap 10px
+  color var(--color-text)
+  font-size 0.98rem
+  font-weight 650
+  letter-spacing -0.01em
+  white-space nowrap
+  &:hover
+    color var(--color-text)
+  img
+    height 26px
+    width auto
+
+.header-logo-sub
+  color var(--color-text-secondary)
+  font-weight 450
+  &::before
+    content '/'
+    margin 0 8px
+    color var(--color-border)
+
+.header-nav
+  display none
+  align-items center
+  gap 26px
+  margin-left auto
+  a
+    color var(--color-text-secondary)
+    font-size 0.9rem
+    &:hover
+      color var(--color-text)
+
+.header-actions
+  margin-left auto
+
+.header-cta
+  display inline-block
+  border 1px solid var(--color-border)
+  border-radius var(--radius-sm)
+  padding 7px 14px
+  font-size 0.82rem
+  color var(--color-text)
+  white-space nowrap
+  &:hover
+    border-color var(--color-primary)
+    color var(--color-primary)
+
+@media (min-width: 768px)
+  .header-nav
+    display flex
+  .header-actions
+    margin-left 0

@@ -1,0 +1,6 @@
+//- Shared install block mixin for widget detail pages.
+mixin installBlock(w)
+  .install-block
+    span.install-label Install string
+    code.install-code= w.installString
+    button.copy-btn.primary(type='button' data-copy=w.installString) Copy install string

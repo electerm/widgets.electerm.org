@@ -1,0 +1,44 @@
+/* ===== Reset ===== */
+*, *::before, *::after
+  box-sizing border-box
+  margin 0
+  padding 0
+
+html
+  -webkit-text-size-adjust 100%
+  scroll-behavior smooth
+
+body
+  font-family var(--font-sans)
+  font-size 16px
+  line-height 1.65
+  color var(--color-text)
+  background var(--color-bg)
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+
+a
+  color var(--color-primary)
+  text-decoration none
+  transition color 0.18s ease
+  &:hover
+    color var(--color-primary-dark)
+
+button
+  font inherit
+  cursor pointer
+
+img
+  max-width 100%
+  display block
+
+h1, h2, h3
+  line-height 1.2
+  letter-spacing -0.02em
+  font-weight 650
+
+p
+  text-wrap pretty
+
+ul
+  list-style none

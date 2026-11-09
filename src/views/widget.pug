@@ -1,0 +1,70 @@
+include ./parts/install
+doctype html
+html(lang='en')
+  head
+    include ./parts/head
+  body
+    include ./parts/header
+    main
+      .container
+        nav.breadcrumb
+          a(href='/') Widgets
+          span.sep /
+          span= widget.id
+        header.widget-hero
+          p.eyebrow= widget.id
+          h1.widget-title= widget.name || widget.id
+          p.widget-lead= widget.description
+          .widget-tags
+            span.tag= 'v' + (widget.version || '0')
+            span.tag= widget.license || 'no license'
+            span.tag= widget.host
+        section.detail-section
+          .section-head
+            h2 Package
+            p Every field comes from the widget's own package.json and the pinned commit.
+          dl.detail-grid
+            .detail-item
+              dt Repository
+              dd
+                a(href=widget.sourceUrl target='_blank' rel='noreferrer')= widget.owner + '/' + widget.repo
+            .detail-item
+              dt Author
+              dd= widget.author || '—'
+            .detail-item
+              dt Version
+              dd.mono= widget.version || '—'
+            .detail-item
+              dt License
+              dd= widget.license || '—'
+            .detail-item
+              dt Homepage
+              dd
+                if widget.homepageUrl
+                  a(href=widget.homepageUrl target='_blank' rel='noreferrer')= widget.homepage
+                else
+                  span= widget.homepage || '—'
+            .detail-item
+              dt Subdir
+              dd.mono= widget.subdir || '(repo root)'
+            .detail-item
+              dt Commit
+              dd.mono= widget.ref
+            .detail-item
+              dt Files
+              dd.mono= widget.fileCount + ' files / ' + widget.totalSize + ' bytes'
+          .digest-block
+            span.install-label Reproducible digest
+            code= widget.digest
+        section.install-section
+          .section-head
+            h2 Install
+            p In the desktop app, use Widgets → Online to install this pinned commit with per-file verification. For the web app or offline use, copy the string below into Widgets → Import; that path does not verify the registry digest.
+          +installBlock(widget)
+      section.trust.trust-inline
+        .container
+          .trust-inner
+            h2 Trust the author
+            p A widget's main.js runs inside the electerm main process with full Node.js privileges. This site only indexes metadata; the code is downloaded from the author's repository.
+    include ./parts/footer
+    script(type='module' src='/js/pages/widget.js')
