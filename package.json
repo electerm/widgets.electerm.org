@@ -1,0 +1,31 @@
+{
+  "name": "electerm-widgets",
+  "version": "1.0.0",
+  "description": "Community registry of electerm widgets (pure static site)",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test \"test/**/*.test.js\"",
+    "lint": "standard",
+    "deploy": "npm run build && wrangler deploy",
+    "wdev": "wrangler dev --port 26790 --ip 127.0.0.1"
+  },
+  "dependencies": {
+    "tar": "^7.4.3"
+  },
+  "devDependencies": {
+    "standard": "^17.1.2",
+    "wrangler": "^4.110.0"
+  },
+  "standard": {
+    "ignore": [
+      "public/",
+      "node_modules/"
+    ],
+    "envs": [
+      "node",
+      "browser"
+    ]
+  }
+}

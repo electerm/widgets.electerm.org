@@ -1,0 +1,8 @@
+node_modules/
+public/
+.wrangler/
+.workbuddy/
+.dev.vars
+.env
+*.log
+.DS_Store

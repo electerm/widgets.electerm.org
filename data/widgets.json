@@ -1,0 +1,37 @@
+[
+  {
+    "host": "github.com",
+    "owner": "electerm",
+    "repo": "electerm-widget-rename-files",
+    "subdir": "",
+    "ref": "f39d2409ee633f5ff670392082e07552dae1f089"
+  },
+  {
+    "host": "github.com",
+    "owner": "electerm",
+    "repo": "electerm-widget-static-server",
+    "subdir": "",
+    "ref": "fc7cc0f144eed4168ae01b1f84403fb735e33291"
+  },
+  {
+    "host": "github.com",
+    "owner": "electerm",
+    "repo": "electerm-widget-ftp-server",
+    "subdir": "",
+    "ref": "12216bddc36178df415253f350768d85ad5743ce"
+  },
+  {
+    "host": "github.com",
+    "owner": "electerm",
+    "repo": "electerm-widget-passbolt-search",
+    "subdir": "",
+    "ref": "c18acfde3c72a8e1cdafbabe8bd14618dbfa9711"
+  },
+  {
+    "host": "github.com",
+    "owner": "electerm",
+    "repo": "electerm-widget-docker-cockpit",
+    "subdir": "",
+    "ref": "9da21119f04400f98b7326e0a5c6dd60e0247a90"
+  }
+]
