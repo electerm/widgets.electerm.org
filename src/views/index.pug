@@ -7,10 +7,14 @@ html(lang='en')
     include ./parts/header
     main
       section.hero
+        .hero-bg(data-hero-bg aria-hidden='true')
         .container
           p.eyebrow Community registry
           h1.hero-title Widgets for electerm
           p.hero-lead Extend electerm with community widgets. Every entry is pinned to a commit, and the registry publishes a reproducible digest for every file in the package.
+          .hero-actions
+            a.hero-btn.primary(href='#registry') Browse widgets
+            a.hero-btn.secondary(href='#how-to') See how it works
           .hero-stats
             .stat
               span.stat-num= count
@@ -21,7 +25,29 @@ html(lang='en')
             .stat
               span.stat-num sha256
               span.stat-label per-file digest
-      section.registry
+      section#how-to.how-to
+        .container
+          .section-head
+            h2 How to use
+            p Three steps: copy a pinned install string, import it in the desktop app, let electerm verify every file.
+          .how-to-banner(data-how-banner)
+          ol.how-to-steps
+            li.how-step
+              span.how-num 01
+              .how-step-body
+                h3 Copy the install string
+                p Every card copies a repo reference pinned to the exact commit the registry hashed.
+            li.how-step
+              span.how-num 02
+              .how-step-body
+                h3 Import in electerm
+                p In the desktop app, open Widgets → Online and paste the string.
+            li.how-step
+              span.how-num 03
+              .how-step-body
+                h3 Every file verified
+                p The app checks each file's sha256 against the registry digest before the widget runs.
+      section#registry.registry
         .container
           .section-head
             h2 Available widgets

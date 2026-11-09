@@ -1,0 +1,49 @@
+/* ===== How to use section ===== */
+.how-to
+  padding 8px 0 0
+
+// The banner module builds its own DOM; this host only owns the box.
+.how-to-banner
+  width 100%
+
+.how-to-steps
+  display grid
+  grid-template-columns 1fr
+  gap 16px
+  margin-top 26px
+
+.how-step
+  display flex
+  gap 14px
+  padding 18px 20px
+  border 1px solid var(--color-border)
+  border-radius var(--radius-md)
+  background var(--color-bg-alt)
+
+.how-num
+  flex-shrink 0
+  padding-top 3px
+  font-family var(--font-mono)
+  font-size 0.78rem
+  font-weight 650
+  color var(--color-primary)
+
+.how-step-body
+  h3
+    font-size 0.98rem
+    margin-bottom 4px
+  p
+    font-size 0.86rem
+    line-height 1.55
+    color var(--color-text-secondary)
+
+@media (min-width: 640px)
+  .how-to-steps
+    grid-template-columns repeat(3, 1fr)
+
+// At phone widths the em-scaled scene would be unreadable. The three steps
+// above are the real content; the module stays mounted but never plays because
+// IntersectionObserver sees a display:none host.
+@media (max-width: 639px)
+  .how-to-banner
+    display none

@@ -17,12 +17,16 @@
 .footer-brand-name
   display flex
   align-items center
-  gap 10px
+  gap 8px
   font-size 0.98rem
   font-weight 650
   img
     height 24px
     width auto
+  span::before
+    content '/'
+    margin 0 6px
+    color var(--color-border)
 
 .footer-brand p
   margin-top 12px
