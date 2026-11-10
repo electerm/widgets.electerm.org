@@ -1,0 +1,38 @@
+doctype html
+html(lang='en')
+  head
+    include ./parts/head
+  body
+    include ./parts/header
+    main.widget-list-page
+      .container
+        header.widget-list-head
+          p.eyebrow Registry
+          h1 All widgets
+          p.widget-list-lead Every widget in the registry, pinned to a commit. The site indexes metadata only — widget code is downloaded from each author's repository.
+          .widget-list-facts
+            span= count + (count === 1 ? ' widget' : ' widgets')
+            span= 'last built ' + updatedLabel
+            a.text-link(href='/api/v1/index.json') JSON index
+        if widgets.length
+          ol.widget-list
+            each w in widgets
+              li.widget-row
+                a.widget-row-main(href='/widget/' + w.id + '/')
+                  .widget-row-body
+                    .widget-row-title-line
+                      h2.widget-row-title= w.name || w.id
+                      span.widget-row-version= 'v' + (w.version || '0')
+                    p.widget-row-desc= w.description
+                    .widget-row-meta
+                      span= w.id
+                      if w.author
+                        span= w.author
+                      span= w.license || 'no license'
+                .widget-row-side
+                  code.widget-row-ref= w.owner + '/' + w.repo
+                  button.copy-btn(type='button' data-copy=w.installString aria-label='Copy install string for ' + (w.name || w.id)) Copy install
+        else
+          p.widget-list-empty No widgets indexed yet.
+    include ./parts/footer
+    script(type='module' src='/js/pages/widgets.js')

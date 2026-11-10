@@ -1,0 +1,139 @@
+/* ===== Standalone /widgets/ index: the list is the whole page ===== */
+.widget-list-page
+  padding 56px 0 96px
+
+.widget-list-head
+  padding-bottom 28px
+  border-bottom 1px solid var(--color-border)
+  h1
+    font-size clamp(1.9rem, 4vw, 2.5rem)
+    margin 10px 0 12px
+
+.widget-list-lead
+  max-width 68ch
+  font-size 0.95rem
+  color var(--color-text-secondary)
+
+.widget-list-facts
+  display flex
+  flex-wrap wrap
+  align-items center
+  gap 8px 24px
+  margin-top 20px
+  font-family var(--font-mono)
+  font-size 0.76rem
+  color var(--color-text-muted)
+  a
+    font-family var(--font-sans)
+
+.widget-list
+  list-style none
+  counter-reset widget-row
+
+.widget-row
+  counter-increment widget-row
+  display flex
+  align-items flex-start
+  gap 24px
+  padding 22px 0
+  border-bottom 1px solid var(--color-border-light)
+  &:last-child
+    border-bottom 0
+
+.widget-row-main
+  display flex
+  flex 1
+  min-width 0
+  gap 20px
+  color var(--color-text)
+  &::before
+    content counter(widget-row, decimal-leading-zero)
+    flex 0 0 auto
+    padding-top 4px
+    font-family var(--font-mono)
+    font-size 0.75rem
+    color var(--color-text-muted)
+  &:hover
+    color var(--color-text)
+    .widget-row-title
+      color var(--color-primary)
+
+.widget-row-body
+  flex 1
+  min-width 0
+
+.widget-row-title-line
+  display flex
+  align-items baseline
+  flex-wrap wrap
+  gap 6px 12px
+
+.widget-row-title
+  font-size 1.12rem
+  transition color 0.18s ease
+
+.widget-row-version
+  font-family var(--font-mono)
+  font-size 0.75rem
+  color var(--color-text-muted)
+
+.widget-row-desc
+  margin-top 8px
+  max-width 70ch
+  font-size 0.9rem
+  color var(--color-text-secondary)
+
+.widget-row-meta
+  display flex
+  flex-wrap wrap
+  margin-top 12px
+  font-family var(--font-mono)
+  font-size 0.72rem
+  color var(--color-text-muted)
+  span:not(:last-child)::after
+    content '·'
+    margin 0 10px
+    color var(--color-border)
+
+.widget-row-side
+  display flex
+  flex-direction column
+  align-items flex-end
+  gap 10px
+  flex 0 0 auto
+  padding-top 2px
+
+.widget-row-ref
+  font-size 0.72rem
+  color var(--color-text-muted)
+  word-break break-all
+  text-align right
+
+.widget-list-empty
+  padding 48px 0
+  color var(--color-text-secondary)
+
+@media (max-width: 639px)
+  .widget-row
+    flex-wrap wrap
+    gap 14px
+  .widget-row-main
+    flex-basis 100%
+    gap 14px
+  .widget-row-side
+    flex-direction row
+    align-items center
+    justify-content space-between
+    gap 12px
+    width 100%
+    padding-left 34px
+  .widget-row-ref
+    flex 1
+    min-width 0
+    text-align left
+    white-space nowrap
+    overflow hidden
+    text-overflow ellipsis
+    word-break normal
+  .widget-row-side .copy-btn
+    flex 0 0 auto

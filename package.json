@@ -9,7 +9,8 @@
     "test": "node --test \"test/**/*.test.js\"",
     "lint": "standard",
     "deploy": "npm run build && wrangler deploy",
-    "wdev": "wrangler dev --port 26790 --ip 127.0.0.1"
+    "wdev": "wrangler dev --port 26790 --ip 127.0.0.1",
+    "start": "npm run wdev"
   },
   "dependencies": {
     "tar": "^7.4.3"

@@ -6,7 +6,8 @@
  *   - public/api/v1/index.json
  *   - public/api/v1/widgets/<id>.json
  *   - public/api/v1/revocations.json
- *   - public/index.html, public/widget/<id>/index.html, public/404.html
+ *   - public/index.html, public/widgets/index.html,
+ *     public/widget/<id>/index.html, public/404.html
  *     (rendered from src/views pug templates)
  *   - public/styles.<hash>.css (compiled from src/css stylus parts)
  *   - public/js/** (native ESM pages + parts)

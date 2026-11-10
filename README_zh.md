@@ -26,9 +26,13 @@ npm run wdev         # wrangler dev，端口 26790
 
 站点源码在 `src/`，结构与 [electerm.org](https://electerm.org) 一致：
 
-- `src/views/` — pug 页面（`index.pug`、`widget.pug`、`404.pug`）与公共 `parts/`
+- `src/views/` — pug 页面（`index.pug`、`widgets.pug`、`widget.pug`、`404.pug`）与公共 `parts/`
 - `src/css/` — `main.styl` 通过 `@require` 汇总 `css/parts/` 里每个区块的样式
 - `src/js/pages/` — 每个页面一个原生 ESM 入口，引用 `js/parts/`
+
+`/widgets/`（`public/widgets/index.html`）是独立清单页：只列出全部 widget，
+没有 hero、how-to、trust 等区块。它沿用站点 header/footer 与「复制安装串」
+按钮，只加载 `header.js` + `copy.js`。
 
 共用的品牌资源（favicon、`electerm.png` 字标、PWA 图标）直接引用
 `https://electerm.org`，不在本站复制一份；该域名已带

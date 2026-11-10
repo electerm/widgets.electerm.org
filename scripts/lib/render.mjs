@@ -102,6 +102,15 @@ export async function renderSite ({ root, publicDir, host, widgets, generatedAt 
     widgets
   })
 
+  // Standalone index: the widget list is the only content, no hero/how-to/trust.
+  await renderPug(path.join(views, 'widgets.pug'), path.join(publicDir, 'widgets', 'index.html'), {
+    ...base,
+    title: 'All widgets - electerm widgets',
+    description: 'The full electerm widget registry: every widget indexed at a pinned commit.',
+    url: '/widgets/',
+    widgets
+  })
+
   for (const w of widgets) {
     await renderPug(
       path.join(views, 'widget.pug'),
