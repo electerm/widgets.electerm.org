@@ -19,5 +19,12 @@
     "repo": "electerm-widget-tftp",
     "subdir": "",
     "ref": "62957d636a302d43e606615857e32963950ef37c"
+  },
+  {
+    "host": "github.com",
+    "owner": "electerm",
+    "repo": "electerm-widget-custom-css",
+    "subdir": "",
+    "ref": "54c8fc1145ecd896f0223e1c39ad9e6e3ecdc031"
   }
 ]
