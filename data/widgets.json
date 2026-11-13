@@ -23,8 +23,36 @@
   {
     "host": "github.com",
     "owner": "electerm",
-    "repo": "electerm-widget-custom-css",
+    "repo": "electerm-widget-hide-sftp-local",
     "subdir": "",
-    "ref": "793d99268b7f550d4600ff0fd1762c7305b71f2f"
+    "ref": "508113256bb8d936a5c34c1ce03c70295c71a7dd"
+  },
+  {
+    "host": "github.com",
+    "owner": "electerm",
+    "repo": "electerm-widget-swap-sftp-panes",
+    "subdir": "",
+    "ref": "6c7deb7cc6b0f1638f85d7fce6d765e4ddf61d72"
+  },
+  {
+    "host": "github.com",
+    "owner": "electerm",
+    "repo": "electerm-widget-hide-ai-suggestions",
+    "subdir": "",
+    "ref": "b541762c0e22f0db3b7629d85380e899dfb79733"
+  },
+  {
+    "host": "github.com",
+    "owner": "electerm",
+    "repo": "electerm-widget-split-view-stack",
+    "subdir": "",
+    "ref": "b034673da45f57438c4f3adfbcbf0be75a0d94e4"
+  },
+  {
+    "host": "github.com",
+    "owner": "electerm",
+    "repo": "electerm-widget-terminal-bg-stretch",
+    "subdir": "",
+    "ref": "cd94b7cdf73d971491012b35917271848f3406b3"
   }
 ]
