@@ -64,13 +64,18 @@ ESM，不需要打包器。
   "owner": "electerm",
   "repo": "electerm-widget-tftp",
   "subdir": "",
-  "ref": "<40 位小写十六进制 commit sha>"
+  "ref": "<40 位小写十六进制 commit sha>",
+  "author": "ZHAO Xudong"
 }
 ```
 
 `ref` **必须**是完整的 40 位小写 hex commit sha（不能是 tag 或分支）；固定 sha
 才能保证 digest 可复现。widget 的 `package.json` 必须含 `electerm` 对象，且
 `electerm.id` 匹配 `^[a-z0-9-]+$`。
+
+`author` 与 `homepage` 是可选项，且**只做兜底**：widget 的 `package.json`
+（先 `electerm.author`，再 `author`）有值时始终以它为准，只在 package.json
+没写时才用 registry 里的值。能改 widget 仓库时优先改 package.json。
 
 ## CI / 部署
 

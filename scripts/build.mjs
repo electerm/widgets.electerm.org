@@ -314,6 +314,9 @@ async function fetchAtomgit (spec, widgetRoot) {
 // ── Manifest / metadata ─────────────────────────────────────
 async function readMeta (widgetRoot, spec) {
   const label = `${spec.owner}/${spec.repo}${spec.subdir ? '/' + spec.subdir : ''}`
+  // data/widgets.json can carry the metadata a widget's package.json omits.
+  // The package.json value always wins so the source stays authoritative.
+  const fallback = (key, max) => limit(coerceStr(spec[key]), max)
   let pkg
   try {
     pkg = JSON.parse(await readFile(path.join(widgetRoot, 'package.json'), 'utf8'))
@@ -336,9 +339,9 @@ async function readMeta (widgetRoot, spec) {
     version: pickField(el, pkg, 'version', 100),
     name: pickField(el, pkg, 'name', 120),
     description: pickField(el, pkg, 'description', 600),
-    author: pickField(el, pkg, 'author', 200),
+    author: pickField(el, pkg, 'author', 200) || fallback('author', 200),
     license: pickField(el, pkg, 'license', 100),
-    homepage: pickField(el, pkg, 'homepage', 500)
+    homepage: pickField(el, pkg, 'homepage', 500) || fallback('homepage', 500)
   }
 }
 
@@ -457,7 +460,24 @@ function validateSpecs (raw) {
     if (!SHA_RE.test(ref)) {
       throw new Error(`data/widgets.json[${i}].ref must be a 40-char lowercase hex sha, got "${ref}"`)
     }
-    return { host, owner, repo, subdir, ref }
+    // Optional metadata used only when the widget's own package.json has none.
+    const optional = (key) => {
+      const v = spec[key]
+      if (v === undefined || v === null) return ''
+      if (typeof v !== 'string') {
+        throw new Error(`data/widgets.json[${i}].${key} must be a string`)
+      }
+      return v.trim()
+    }
+    const author = optional('author')
+    const homepage = optional('homepage')
+    if (author.length > 200) {
+      throw new Error(`data/widgets.json[${i}].author must be at most 200 chars`)
+    }
+    if (homepage && !safeHref(homepage)) {
+      throw new Error(`data/widgets.json[${i}].homepage must be an http(s) URL`)
+    }
+    return { host, owner, repo, subdir, ref, author, homepage }
   })
 }
 

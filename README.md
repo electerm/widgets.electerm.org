@@ -68,7 +68,8 @@ Open a PR that appends an entry to `data/widgets.json`:
   "owner": "electerm",
   "repo": "electerm-widget-tftp",
   "subdir": "",
-  "ref": "<40-char lowercase hex commit sha>"
+  "ref": "<40-char lowercase hex commit sha>",
+  "author": "ZHAO Xudong"
 }
 ```
 
@@ -76,6 +77,11 @@ Open a PR that appends an entry to `data/widgets.json`:
 branch); pinning a sha is what makes the digest reproducible. The widget's
 `package.json` must contain an `electerm` object whose `id` matches
 `^[a-z0-9-]+$`.
+
+`author` and `homepage` are optional. They are **fallbacks only**: a value in
+the widget's `package.json` (`electerm.author`, then `author`) always wins, and
+the registry entry is used when the package.json has none. Use them when a
+widget repo cannot be changed; prefer fixing the package.json.
 
 ## CI / deploy
 
