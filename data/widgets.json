@@ -54,5 +54,12 @@
     "repo": "electerm-widget-terminal-bg-stretch",
     "subdir": "",
     "ref": "d1fc31e0e09cc28c7219816b213ac18f912e5209"
+  },
+  {
+    "host": "github.com",
+    "owner": "electerm",
+    "repo": "electerm-widget-fatfish-watermark",
+    "subdir": "",
+    "ref": "854dda42235461ec9f6a34136d84f80b4077e152"
   }
 ]
