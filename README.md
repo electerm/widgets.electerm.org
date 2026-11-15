@@ -25,28 +25,6 @@ npm run wdev         # wrangler dev on localhost:26790
 `public/` is generated and git-ignored; it is rebuilt by `npm run build` on
 every deploy. No database or migration step is needed.
 
-## Site structure
-
-The site is built from `src/`, mirroring [electerm.org](https://electerm.org):
-
-- `src/views/` — pug pages (`index.pug`, `widgets.pug`, `widget.pug`, `404.pug`) plus shared `parts/`
-- `src/css/` — `main.styl` requires one file per section from `css/parts/`
-- `src/js/pages/` — one native ESM entry per page, importing `js/parts/`
-
-`/widgets/` (`public/widgets/index.html`) is the standalone index: it lists every
-widget and nothing else — no hero, how-to or trust sections. It shares the site
-header/footer and the copy-install button, and loads only `header.js` + `copy.js`.
-
-Shared brand assets (favicons, the `electerm.png` wordmark, PWA icons) are
-referenced directly from `https://electerm.org` rather than copied here —
-that origin already serves them with `Access-Control-Allow-Origin: *`. The
-build generates only the site-specific `public/site.webmanifest`, whose icon
-URLs are absolute.
-
-`npm run build` compiles the stylus parts into a content-hashed
-`styles.<hash>.css`, renders every pug page, and copies `js/`
-into `public/`. Browser scripts are plain ESM, so there is no bundler.
-
 ## Data contract
 
 `GET /api/v1/index.json`, `GET /api/v1/widgets/<id>.json`,

@@ -22,27 +22,6 @@ npm run wdev         # wrangler dev，端口 26790
 `public/` 为生成物且已加入 .gitignore，每次部署都由 `npm run build` 重建。
 不需要数据库，也没有迁移步骤。
 
-## 站点结构
-
-站点源码在 `src/`，结构与 [electerm.org](https://electerm.org) 一致：
-
-- `src/views/` — pug 页面（`index.pug`、`widgets.pug`、`widget.pug`、`404.pug`）与公共 `parts/`
-- `src/css/` — `main.styl` 通过 `@require` 汇总 `css/parts/` 里每个区块的样式
-- `src/js/pages/` — 每个页面一个原生 ESM 入口，引用 `js/parts/`
-
-`/widgets/`（`public/widgets/index.html`）是独立清单页：只列出全部 widget，
-没有 hero、how-to、trust 等区块。它沿用站点 header/footer 与「复制安装串」
-按钮，只加载 `header.js` + `copy.js`。
-
-共用的品牌资源（favicon、`electerm.png` 字标、PWA 图标）直接引用
-`https://electerm.org`，不在本站复制一份；该域名已带
-`Access-Control-Allow-Origin: *`。构建时只生成本站专属的
-`public/site.webmanifest`，里面的图标 URL 用绝对路径。
-
-`npm run build` 会把 stylus parts 编译成带内容哈希的 `styles.<hash>.css`，
-渲染所有 pug 页面，并把 `js/` 复制进 `public/`。浏览器脚本是原生
-ESM，不需要打包器。
-
 ## 数据契约
 
 `GET /api/v1/index.json`、`GET /api/v1/widgets/<id>.json`、
