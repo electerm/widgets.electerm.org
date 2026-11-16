@@ -2,6 +2,13 @@
   {
     "host": "github.com",
     "owner": "electerm",
+    "repo": "electerm-widget-fatfish-watermark",
+    "subdir": "",
+    "ref": "61ae2ec00218457ebebf6bb83fcb8bf33df6be7c"
+  },
+  {
+    "host": "github.com",
+    "owner": "electerm",
     "repo": "electerm-widget-passbolt-search",
     "subdir": "",
     "ref": "4072025b74099e803ad4067e50cad6fc09d10ebe"
@@ -54,12 +61,5 @@
     "repo": "electerm-widget-terminal-bg-stretch",
     "subdir": "",
     "ref": "82ff1512c23c4c762cd94be437283bf918310e40"
-  },
-  {
-    "host": "github.com",
-    "owner": "electerm",
-    "repo": "electerm-widget-fatfish-watermark",
-    "subdir": "",
-    "ref": "61ae2ec00218457ebebf6bb83fcb8bf33df6be7c"
   }
 ]
