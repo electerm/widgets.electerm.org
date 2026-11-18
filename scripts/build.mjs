@@ -32,7 +32,8 @@ import * as tar from 'tar'
 import {
   computeDigest,
   isSafeRelativePath,
-  isSafeSegment
+  isSafeSegment,
+  sanitizeWidgetI18n
 } from './lib/registry.mjs'
 import { renderSite } from './lib/render.mjs'
 
@@ -341,7 +342,9 @@ async function readMeta (widgetRoot, spec) {
     description: pickField(el, pkg, 'description', 600),
     author: pickField(el, pkg, 'author', 200) || fallback('author', 200),
     license: pickField(el, pkg, 'license', 100),
-    homepage: pickField(el, pkg, 'homepage', 500) || fallback('homepage', 500)
+    homepage: pickField(el, pkg, 'homepage', 500) || fallback('homepage', 500),
+    // from the pinned tree, never from live data/widgets.json
+    i18n: sanitizeWidgetI18n(el.i18n)
   }
 }
 
@@ -412,6 +415,7 @@ async function buildWidget (spec, workRoot) {
     version: meta.version,
     name: meta.name,
     description: meta.description,
+    i18n: meta.i18n,
     author: meta.author,
     license: meta.license,
     homepage: meta.homepage,
