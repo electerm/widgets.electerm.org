@@ -9,7 +9,8 @@ import {
   computeDigest,
   escapeHtml,
   isSafeRelativePath,
-  isSafeSegment
+  isSafeSegment,
+  sanitizeWidgetI18n
 } from '../scripts/lib/registry.mjs'
 
 const SAMPLE = [
@@ -91,6 +92,28 @@ test('unsafe single path segments are rejected', () => {
   }
   assert.equal(isSafeSegment('main.js'), true)
   assert.equal(isSafeSegment('.hidden'), true)
+})
+
+test('widget i18n keeps only the strings the electerm client renders', () => {
+  const clean = sanitizeWidgetI18n({
+    zh_cn: {
+      name: '中文名字',
+      description: '描述',
+      type: 'instance',
+      configs: {
+        host: { label: '地址', description: '说明', type: 'password' },
+        bad: 'not an object'
+      }
+    },
+    'zh-CN': { name: 'ignored' }
+  })
+  assert.deepStrictEqual(clean, {
+    zh_cn: {
+      name: '中文名字',
+      description: '描述',
+      configs: { host: { label: '地址', description: '说明' } }
+    }
+  })
 })
 
 test('HTML escaping covers every dangerous character', () => {
