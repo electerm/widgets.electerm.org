@@ -2,64 +2,71 @@
   {
     "host": "github.com",
     "owner": "electerm",
+    "repo": "electerm-widget-hide-ui-elements",
+    "subdir": "",
+    "ref": "bc850880022b265c4909a7fe8cc5c91e95195611"
+  },
+  {
+    "host": "github.com",
+    "owner": "electerm",
     "repo": "electerm-widget-fatfish-watermark",
     "subdir": "",
-    "ref": "61ae2ec00218457ebebf6bb83fcb8bf33df6be7c"
+    "ref": "8256a7965f3dd841a41324769892a9223535f848"
   },
   {
     "host": "github.com",
     "owner": "electerm",
     "repo": "electerm-widget-passbolt-search",
     "subdir": "",
-    "ref": "4072025b74099e803ad4067e50cad6fc09d10ebe"
+    "ref": "60c04a6dd9787d9dfb3ad0bed295d598d96bc917"
   },
   {
     "host": "github.com",
     "owner": "electerm",
     "repo": "electerm-widget-docker-cockpit",
     "subdir": "",
-    "ref": "cde4ebb86d902fa20d875b1dda2c8cb7d4a2fda5"
+    "ref": "1f7bcd7e190036a2885c4ef0b7c7efc322a0ec7b"
   },
   {
     "host": "github.com",
     "owner": "electerm",
     "repo": "electerm-widget-tftp",
     "subdir": "",
-    "ref": "255401bf5a17b7b67de46d449a97b88b3f13c956"
+    "ref": "9ff38a73c5671756ecbc31582d043be1f90b3f20"
   },
   {
     "host": "github.com",
     "owner": "electerm",
     "repo": "electerm-widget-hide-sftp-local",
     "subdir": "",
-    "ref": "386a6583f07a3049c1f5326a3ea705b9cdfaa605"
+    "ref": "4e0c9a4ccd347366ded87e1959e4b8f3178a55ce"
   },
   {
     "host": "github.com",
     "owner": "electerm",
     "repo": "electerm-widget-swap-sftp-panes",
     "subdir": "",
-    "ref": "0b0e37ddcc6d7d55e4d66173ea4d7ea1bdef51fc"
+    "ref": "6f03dc911cf258b8fc6f8adae81e6b9321d1c9cf"
   },
   {
     "host": "github.com",
     "owner": "electerm",
     "repo": "electerm-widget-hide-ai-suggestions",
     "subdir": "",
-    "ref": "7370f8e9e87731996746bff8c215ff5c357d2588"
+    "ref": "f6de84ba4bb86228101790f21523dabb62326543"
   },
   {
     "host": "github.com",
     "owner": "electerm",
     "repo": "electerm-widget-split-view-stack",
     "subdir": "",
-    "ref": "3f8b3112af5d3152072c5599682e7b91ea50aec3"
+    "ref": "9acb4f0f1187cce72998184807fc4105c288f5ee"
   },
   {
     "host": "github.com",
     "owner": "electerm",
     "repo": "electerm-widget-terminal-bg-stretch",
     "subdir": "",
-    "ref": "82ff1512c23c4c762cd94be437283bf918310e40"
+    "ref": "8feeda59583170489a76f4154163e7aa4bc5c6b4"
   }
 ]
