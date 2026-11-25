@@ -68,5 +68,12 @@
     "repo": "electerm-widget-terminal-bg-stretch",
     "subdir": "",
     "ref": "3951388fd7179ed2a60d0d1fe3034b26fe38511d"
+  },
+  {
+    "host": "github.com",
+    "owner": "electerm",
+    "repo": "electerm-widget-native-rdp-no-tab",
+    "subdir": "",
+    "ref": "6052383516fcd24d13ce80c84688b39f7801ddbd"
   }
 ]
