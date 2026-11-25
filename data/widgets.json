@@ -4,14 +4,14 @@
     "owner": "electerm",
     "repo": "electerm-widget-hide-ui-elements",
     "subdir": "",
-    "ref": "bc850880022b265c4909a7fe8cc5c91e95195611"
+    "ref": "9c18ded34f31c3ec89d34dd783734811e2396ca8"
   },
   {
     "host": "github.com",
     "owner": "electerm",
     "repo": "electerm-widget-fatfish-watermark",
     "subdir": "",
-    "ref": "8256a7965f3dd841a41324769892a9223535f848"
+    "ref": "90ec72201d0bcc6c4c6b3283183fc03a29eb51e0"
   },
   {
     "host": "github.com",
@@ -39,34 +39,34 @@
     "owner": "electerm",
     "repo": "electerm-widget-hide-sftp-local",
     "subdir": "",
-    "ref": "4e0c9a4ccd347366ded87e1959e4b8f3178a55ce"
+    "ref": "4bb4c29ee9e90f3177aa2b7922d070f50c95ac1f"
   },
   {
     "host": "github.com",
     "owner": "electerm",
     "repo": "electerm-widget-swap-sftp-panes",
     "subdir": "",
-    "ref": "6f03dc911cf258b8fc6f8adae81e6b9321d1c9cf"
+    "ref": "59dfafcdba5c9ea9a6ac0af020d444a3b3201c92"
   },
   {
     "host": "github.com",
     "owner": "electerm",
     "repo": "electerm-widget-hide-ai-suggestions",
     "subdir": "",
-    "ref": "f6de84ba4bb86228101790f21523dabb62326543"
+    "ref": "ba9ee0ea6bf4e99e3a1664441226ea7145afb3fc"
   },
   {
     "host": "github.com",
     "owner": "electerm",
     "repo": "electerm-widget-split-view-stack",
     "subdir": "",
-    "ref": "9acb4f0f1187cce72998184807fc4105c288f5ee"
+    "ref": "cab8aaab2d501c01483523d2028399cd3935d416"
   },
   {
     "host": "github.com",
     "owner": "electerm",
     "repo": "electerm-widget-terminal-bg-stretch",
     "subdir": "",
-    "ref": "8feeda59583170489a76f4154163e7aa4bc5c6b4"
+    "ref": "3951388fd7179ed2a60d0d1fe3034b26fe38511d"
   }
 ]
