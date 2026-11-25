@@ -2,7 +2,14 @@ meta(charset='utf-8')
 meta(name='viewport' content='width=device-width, initial-scale=1')
 title= title
 meta(name='description' content=description)
-meta(name='theme-color' content='#ffffff')
+meta(name='theme-color' content='#0f172a')
+script.
+  try {
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.dataset.theme = 'light'
+      document.querySelector('meta[name="theme-color"]').content = '#ffffff'
+    }
+  } catch {}
 link(rel='canonical' href=host + url)
 
 //- Brand assets are served from electerm.org; only the site-specific manifest

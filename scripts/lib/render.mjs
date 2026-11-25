@@ -36,8 +36,8 @@ const MANIFEST = {
       type: 'image/png'
     }
   ],
-  theme_color: '#ffffff',
-  background_color: '#ffffff',
+  theme_color: '#0f172a',
+  background_color: '#0f172a',
   display: 'standalone',
   start_url: '/',
   scope: '/'

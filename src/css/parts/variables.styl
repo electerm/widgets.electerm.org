@@ -1,5 +1,8 @@
 /* ===== CSS Variables (shared design tokens with electerm.org) ===== */
 :root
+  color-scheme light
+  --color-text-inverse: #fff
+  --color-header-bg: rgba(255, 255, 255, 0.94)
   --color-primary: #2563eb
   --color-primary-dark: #1d4ed8
   --color-primary-light: #eff6ff
@@ -19,3 +22,19 @@
   --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace
   --max-width: 1080px
   --header-height: 64px
+
+:root[data-theme='dark']
+  color-scheme dark
+  --color-primary: #60a5fa
+  --color-primary-dark: #93c5fd
+  --color-primary-light: #1e3a5f
+  --color-bg: #0f172a
+  --color-bg-alt: #1e293b
+  --color-text: #f1f5f9
+  --color-text-secondary: #cbd5e1
+  --color-text-inverse: #07111f
+  --color-border: #334155
+  --color-border-light: #253147
+  --color-header-bg: rgba(15,23,42,0.92)
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3)
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4), 0 2px 4px -2px rgba(0,0,0,0.3)
