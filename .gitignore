@@ -6,3 +6,4 @@ public/
 .env
 *.log
 .DS_Store
+.workbuddy-ai
